@@ -27,7 +27,7 @@ public class MovieScheduler {
     private final JobLauncher jobLauncher;
     private final BoxOfficeJobConfig boxOfficeJobConfig;
 
-    @Scheduled(cron ="0 0 12 * * *") //매일 01시에 실행
+    @Scheduled(cron ="0 0 0 * * *") //매일 12시에 실행
     public void executeDailyJob () throws ParseException {
         try {
             JobParameters jobParameters = new JobParametersBuilder()
@@ -45,7 +45,7 @@ public class MovieScheduler {
 
     }
 
-//    @Scheduled(cron = "0 0 12 * * *")
+//    @Scheduled(cron = "0 0 0 * * *")
 //    public void saveDayMovieInfo() throws ParseException {
 //        LocalDate day = LocalDate.now().minusDays(1);
 //        String dayString = day.toString().replace("-", "");
