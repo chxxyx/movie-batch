@@ -1,15 +1,9 @@
 package com.chxxyx0.moviebatch.schedule;
 
-import com.chxxyx0.moviebatch.entity.Movie;
-import com.chxxyx0.moviebatch.entity.MovieCode;
 import com.chxxyx0.moviebatch.job.BoxOfficeJobConfig;
 import com.chxxyx0.moviebatch.job.MovieInfoJobConfig;
 import com.chxxyx0.moviebatch.service.MovieService;
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobExecutionException;
@@ -47,23 +41,7 @@ public class MovieScheduler {
 
     }
 
-//    @Scheduled(cron = "0 0 0 * * *")
-//    public void saveDayMovieInfo() throws ParseException {
-
-////        LocalDate day = LocalDate.now().minusDays(1);
-////        String dayString = day.toString().replace("-", "");
-////
-////        List<Movie> movieList = new ArrayList<>();
-////        List<MovieCode> movieCodeList = movieService.saveMovieCode(
-////            dayString);
-////
-////        for (MovieCode movieCode : movieCodeList) {
-////            movieList.add(
-////                movieService.saveMovieInfoByMovieCode(movieCode.getCode()));
-////        }
-//    }
-
-    @Scheduled(cron ="0 0 22 * * *") //매일 12시에 실행
+    @Scheduled(cron ="0 0 0 * * *") //매일 1시에 실행
     public void saveDayMovieInfo() {
         try {
             JobParameters jobParameters = new JobParametersBuilder()
