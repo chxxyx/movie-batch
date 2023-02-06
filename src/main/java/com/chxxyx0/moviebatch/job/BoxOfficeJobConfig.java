@@ -30,36 +30,30 @@ public class BoxOfficeJobConfig {
 	private final EntityManagerFactory entityManagerFactory;
 	private final MovieService boxOfficeApiService;
 	private static final int CHUNKSIZE = 100; //쓰기 단위인 청크사이즈
-	LocalDate day = LocalDate.now().minusDays(1);
-	String dayString = day.toString().replace("-", "");
 
 	// JobBuilderFactory를 통해서 tutorialJob을 생성
 	@Bean
-	public Job dailyBoxOfficeJob(){
-		return jobBuilderFactory.get("dailyBoxOfficeJob")
-			.start(dailyBoxOfficeStep())
-			.build();
+	public Job dailyBoxOfficeJob() {
+		return jobBuilderFactory.get("dailyBoxOfficeJob").start(dailyBoxOfficeStep()).build();
 	}
 
 	@Bean
 	public Step dailyBoxOfficeStep() {
-		return stepBuilderFactory.get("dailyBoxOfficeStep")
-			.<MovieCode, MovieCode>chunk(CHUNKSIZE)
-			.reader(dailyBoxOfficeReader())
-			.writer(dailyBoxOfficeWriter())
-			.build();
+		return stepBuilderFactory.get("dailyBoxOfficeStep").<MovieCode, MovieCode>chunk(CHUNKSIZE)
+			.reader(dailyBoxOfficeReader()).writer(dailyBoxOfficeWriter()).build();
 	}
 
 	@Bean
 	public ListItemReader<MovieCode> dailyBoxOfficeReader() {
+		LocalDate day = LocalDate.now().minusDays(1);
+		String dayString = day.toString().replace("-", "");
 		List<MovieCode> dailyMovie = boxOfficeApiService.saveMovieCode(dayString);
 		return new ListItemReader<>(dailyMovie);
 	}
 
 	@Bean
-	public JpaItemWriter<MovieCode> dailyBoxOfficeWriter(){
-		return new JpaItemWriterBuilder<MovieCode>()
-			.entityManagerFactory(this.entityManagerFactory)
+	public JpaItemWriter<MovieCode> dailyBoxOfficeWriter() {
+		return new JpaItemWriterBuilder<MovieCode>().entityManagerFactory(this.entityManagerFactory)
 			.build();
 	}
 
