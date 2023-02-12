@@ -101,8 +101,14 @@ public class MovieService {
 			.title(movieInfo.getMovieNm()).actors(actor).directors(director).genre(genre)
 			.nation(nation).runTime(Long.parseLong(movieInfo.getShowTm())).openDt(openDt)
 			.status(MovieStatus.STATUS_WILL).build();
-
 		movieRepository.save(movie);
+
+		MovieCode movieCodeStatus = movieCodeRepository.findByCode(
+			Long.parseLong(movieInfo.getMovieCd()));
+
+		movieCodeStatus.setBatchStatus("Y");
+		movieCodeRepository.save(movieCodeStatus);
+
 		return movie;
 	}
 }

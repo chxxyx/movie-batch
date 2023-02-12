@@ -60,7 +60,7 @@ public class MovieInfoJobConfig {
 				return 0;
 			}
 		};
-		reader.setQueryString("SELECT m.code from MovieCode m");
+		reader.setQueryString("SELECT m.code from MovieCode m WHERE m.batchStatus IS NULL");
 		reader.setPageSize(CHUNKSIZE);
 		reader.setEntityManagerFactory(entityManagerFactory);
 		reader.setName("movieInfoReader");

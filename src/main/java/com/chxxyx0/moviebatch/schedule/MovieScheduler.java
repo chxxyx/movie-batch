@@ -17,8 +17,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class MovieScheduler {
-
-    private final MovieService movieService;
     private final JobLauncher jobLauncher;
     private final BoxOfficeJobConfig boxOfficeJobConfig;
     private final MovieInfoJobConfig movieInfoJobConfig;

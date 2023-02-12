@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MovieCodeRepository extends JpaRepository<MovieCode, Long> {
+
+	MovieCode findByCode(Long movieCode);
 }
