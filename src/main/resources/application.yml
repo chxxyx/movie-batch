@@ -21,3 +21,6 @@ kobis:
   baseUrl: http://kobis.or.kr/kobisopenapi/webservice/rest
   serviceKey: 97171a56bbee4c2c5a0a42022af67e96
 
+
+server:
+  port: ${PORT:8080}
